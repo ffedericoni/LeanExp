@@ -1,0 +1,5 @@
+name = "LeanExp"
+defaultTargets = ["LeanExp"]
+
+[[lean_lib]]
+name = "LeanExp"
