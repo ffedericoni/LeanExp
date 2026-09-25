@@ -34,6 +34,8 @@ inductive Cond where
   | lt  : Expr → Expr → Cond
   | eq  : Expr → Expr → Cond
   | not : Cond → Cond
+  | and : Cond → Cond → Cond
+  | or  : Cond → Cond → Cond
 
 /-- Istruzioni. -/
 inductive Stmt where
@@ -54,6 +56,8 @@ def Cond.eval (s : Stato) : Cond → Bool
   | lt a b => decide (a.eval s < b.eval s)
   | eq a b => decide (a.eval s = b.eval s)
   | not c  => !c.eval s
+  | and a b => a.eval s && b.eval s
+  | or a b  => a.eval s || b.eval s
 
 /-- **Semantica big-step**: `Exec p s s'` significa "eseguendo `p` nello
 stato `s` il programma termina nello stato `s'`". È una relazione, non una
